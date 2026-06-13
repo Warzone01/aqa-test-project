@@ -40,3 +40,4 @@ build/
 
 # Local-only documentation
 docs/local/allure-setup.md
+/allure-results/
