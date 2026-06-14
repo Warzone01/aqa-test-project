@@ -4,88 +4,98 @@ import com.codeborne.selenide.SelenideElement;
 import io.qameta.allure.Step;
 
 import static com.codeborne.selenide.Condition.cssClass;
-import static com.codeborne.selenide.Condition.text;
-import static com.codeborne.selenide.Selenide.*;
+import static com.codeborne.selenide.Condition.exactText;
+import static com.codeborne.selenide.Condition.visible;
+import static com.codeborne.selenide.Selenide.$;
+import static com.codeborne.selenide.Selenide.open;
 
-public class TextBoxPage extends BasicPage {
+public class TextBoxPage {
 
     private final SelenideElement fullNameInput = $("#userName");
     private final SelenideElement emailInput = $("#userEmail");
     private final SelenideElement currentAddressInput = $("#currentAddress");
     private final SelenideElement permanentAddressInput = $("#permanentAddress");
-
     private final SelenideElement outputBlock = $("#output");
-
     private final SelenideElement submitButton = $("#submit");
+    private final SelenideElement nameOutput = $("#name");
+    private final SelenideElement emailOutput = $("#email");
+    private final SelenideElement currentAddressOutput = $("#output #currentAddress");
+    private final SelenideElement permanentAddressOutput = $("#output #permanentAddress");
 
-    private final String name = "Kirill";
-    private final String currentAddress = "Vyborg";
-    private final String permanentAddress = "SPB";
-
-    @Step("Открыть страницу с инпутами")
+    @Step("Открыть страницу с текстовыми полями")
     public TextBoxPage openPage() {
         open("/text-box");
-        waitPageLoaded();
+        submitButton.shouldBe(visible);
         return this;
     }
 
-    @Step("Ввод текста в поле full name")
-    public TextBoxPage fullNameInputText() {
+    @Step("Ввести полное имя: {name}")
+    public TextBoxPage setFullName(String name) {
         fullNameInput.setValue(name);
         return this;
     }
 
-    @Step("Ввод текста в поле current address")
-    public TextBoxPage currentAddressInputText() {
-        currentAddressInput.setValue(currentAddress);
+    @Step("Ввести текущий адрес: {address}")
+    public TextBoxPage setCurrentAddress(String address) {
+        currentAddressInput.setValue(address);
         return this;
     }
 
-    @Step("Ввод текста в поле permanent address")
-    public TextBoxPage permanentAddressInputText() {
-        permanentAddressInput.setValue(permanentAddress);
+    @Step("Ввести постоянный адрес: {address}")
+    public TextBoxPage setPermanentAddress(String address) {
+        permanentAddressInput.setValue(address);
         return this;
     }
 
-    @Step("Ввод текста в поле email")
-    public TextBoxPage emailInputText(String emailText) {
-        emailInput.setValue(emailText);
+    @Step("Ввести email: {email}")
+    public TextBoxPage setEmail(String email) {
+        emailInput.setValue(email);
         return this;
     }
 
-    @Step("Нажатие на кнопку подтверждения")
-    public TextBoxPage submitButtonClick() {
+    @Step("Отправить форму")
+    public TextBoxPage submit() {
         submitButton.click();
         return this;
     }
 
-    @Step("Проверить, что поле email содержит ошибку")
+    @Step("Проверить ошибку в поле email")
     public TextBoxPage emailShouldHaveError() {
         emailInput.shouldHave(cssClass("field-error"));
         return this;
     }
 
-    @Step("Проверить, что поле email не содержит ошибку")
+    @Step("Проверить отсутствие ошибки в поле email")
     public TextBoxPage emailShouldNotHaveError() {
         emailInput.shouldNotHave(cssClass("field-error"));
         return this;
     }
 
-    @Step("Проверить, что поле name вывело результат")
-    public TextBoxPage nameOutputCheck() {
-        outputBlock.shouldHave(text(name));
+    @Step("Проверить выведенное имя: {name}")
+    public TextBoxPage nameOutputShouldBe(String name) {
+        outputBlock.shouldBe(visible);
+        nameOutput.shouldHave(exactText("Name:" + name));
         return this;
     }
 
-    @Step("Проверить, что поле current Address вывело результат")
-    public TextBoxPage currentAddressOutputCheck() {
-        outputBlock.shouldHave(text(currentAddress));
+    @Step("Проверить выведенный email: {email}")
+    public TextBoxPage emailOutputShouldBe(String email) {
+        outputBlock.shouldBe(visible);
+        emailOutput.shouldHave(exactText("Email:" + email));
         return this;
     }
 
-    @Step("Проверить, что поле permanent address вывело результат")
-    public TextBoxPage permanentAddressOutputCheck() {
-        outputBlock.shouldHave(text(permanentAddress));
+    @Step("Проверить выведенный текущий адрес: {address}")
+    public TextBoxPage currentAddressOutputShouldBe(String address) {
+        outputBlock.shouldBe(visible);
+        currentAddressOutput.shouldHave(exactText("Current Address :" + address));
+        return this;
+    }
+
+    @Step("Проверить выведенный постоянный адрес: {address}")
+    public TextBoxPage permanentAddressOutputShouldBe(String address) {
+        outputBlock.shouldBe(visible);
+        permanentAddressOutput.shouldHave(exactText("Permananet Address :" + address));
         return this;
     }
 }

@@ -3,11 +3,13 @@ package tests;
 import io.qameta.allure.Feature;
 import io.qameta.allure.Story;
 import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 import pages.ButtonsPage;
 
 @Feature("Кнопки")
 @DisplayName("Проверка действий с кнопками")
+@Tag("regression")
 public class ButtonsTest extends BaseTest {
 
     private final ButtonsPage buttonsPage = new ButtonsPage();
@@ -15,6 +17,7 @@ public class ButtonsTest extends BaseTest {
     @Story("Двойное нажатие")
     @DisplayName("Двойное нажатие отображает соответствующее сообщение")
     @Test
+    @Tag("smoke")
     void checkDoubleClick() {
         buttonsPage
                 .openPage()

@@ -1,14 +1,15 @@
 package pages;
 
-import com.codeborne.selenide.Selenide;
 import com.codeborne.selenide.SelenideElement;
 import io.qameta.allure.Step;
 
 import static com.codeborne.selenide.Condition.attribute;
+import static com.codeborne.selenide.Condition.visible;
 import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.$x;
+import static com.codeborne.selenide.Selenide.open;
 
-public class CheckBoxPage extends BasicPage {
+public class CheckBoxPage {
 
     private SelenideElement checkboxByName(String name) {
         return $("[aria-label='Select " + name + "']");
@@ -22,9 +23,10 @@ public class CheckBoxPage extends BasicPage {
         return nodeByName(name).$(".rc-tree-switcher");
     }
 
-    @Step("Открытие страницы с checkBox")
+    @Step("Открыть страницу с чекбоксами")
     public CheckBoxPage openPage() {
-        Selenide.open("/checkbox");
+        open("/checkbox");
+        checkboxByName("Home").shouldBe(visible);
         return this;
     }
 
@@ -41,7 +43,7 @@ public class CheckBoxPage extends BasicPage {
     }
 
     @Step("Проверить, что чекбокс {name} выбран частично")
-    public CheckBoxPage checkboxShouldBeSMixed(String name) {
+    public CheckBoxPage checkboxShouldBeMixed(String name) {
         checkboxByName(name).shouldHave(attribute("aria-checked", "mixed"));
         return this;
     }

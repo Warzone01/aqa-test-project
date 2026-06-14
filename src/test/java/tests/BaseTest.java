@@ -8,7 +8,7 @@ import org.junit.jupiter.api.BeforeAll;
 
 import static com.codeborne.selenide.Selenide.closeWebDriver;
 
-public class BaseTest {
+public abstract class BaseTest {
 
     private static boolean allureListenerRegistered;
 
