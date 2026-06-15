@@ -11,6 +11,7 @@ public class WebTablesTest extends BaseTest {
     void clickButton() {
         webTablesPage
                 .openPage()
-                .addNewRecord();
+                .addNewRecord()
+                .addTenNewRecords();
     }
 }

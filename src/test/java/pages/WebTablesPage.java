@@ -28,12 +28,12 @@ public class WebTablesPage {
 
     public WebTablesPage clickAddButton() {
         addButton.click();
+        firstNameInput.shouldBe(visible);
         return this;
     }
 
     public WebTablesPage addNewRecord() {
-        addButton.click();
-        firstNameInput.shouldBe(visible);
+        clickAddButton();
         firstNameInput.setValue("KIrill");
         lastNameInput.setValue("Gulvaniuk");
         emailInput.setValue("kirill@email.com");
@@ -42,6 +42,21 @@ public class WebTablesPage {
         departmentInput.setValue("NYC");
         submitButton.click();
         addButton.shouldBe(visible);
+        return this;
+    }
+
+    public WebTablesPage addTenNewRecords() {
+        for (int i = 0; i < 10; i++) {
+            clickAddButton();
+            firstNameInput.setValue("KIrill");
+            lastNameInput.setValue("Gulvaniuk");
+            emailInput.setValue("kirill@email.com");
+            ageInput.setValue("26");
+            salaryInput.setValue("123");
+            departmentInput.setValue("NYC");
+            submitButton.click();
+            addButton.shouldBe(visible);
+        }
         return this;
     }
 }
