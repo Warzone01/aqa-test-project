@@ -27,6 +27,30 @@ public class CheckBoxTest extends BaseTest {
                 .selectCheckbox(CheckBoxData.COMMANDS)
                 .checkboxShouldBeMixed(CheckBoxData.HOME_FOLDER)
                 .checkboxShouldBeMixed(CheckBoxData.DESKTOP_FOLDER)
-                .checkboxShouldBeSelected(CheckBoxData.COMMANDS);
+                .checkboxShouldBeSelected(CheckBoxData.COMMANDS)
+                .checkboxShouldNotBeSelected(CheckBoxData.NOTES)
+                .resultShouldNotHaveText(CheckBoxData.NOTES)
+                .resultShouldNotHaveText(CheckBoxData.HOME_FOLDER)
+                .resultShouldHaveText(CheckBoxData.COMMANDS);
+    }
+
+    @Story("Выбор родительского элемента")
+    @DisplayName("Появление родительской папки при выборе всех дочерних элементов")
+    @Test
+    @Tag("regression")
+    void selectParentCheckBox() {
+        checkBoxPage
+                .openPage()
+                .expandFolder(CheckBoxData.HOME_FOLDER)
+                .expandFolder(CheckBoxData.DESKTOP_FOLDER)
+                .selectCheckbox(CheckBoxData.HOME_FOLDER)
+                .checkboxShouldBeSelected(CheckBoxData.HOME_FOLDER)
+                .checkboxShouldBeSelected(CheckBoxData.DESKTOP_FOLDER)
+                .checkboxShouldBeSelected(CheckBoxData.COMMANDS)
+                .checkboxShouldBeSelected(CheckBoxData.NOTES)
+                .resultShouldHaveText(CheckBoxData.HOME_FOLDER)
+                .resultShouldHaveText(CheckBoxData.DESKTOP_FOLDER)
+                .resultShouldHaveText(CheckBoxData.COMMANDS)
+                .resultShouldHaveText(CheckBoxData.NOTES);
     }
 }

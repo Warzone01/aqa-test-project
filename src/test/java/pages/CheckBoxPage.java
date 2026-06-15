@@ -3,8 +3,9 @@ package pages;
 import com.codeborne.selenide.SelenideElement;
 import io.qameta.allure.Step;
 
-import static com.codeborne.selenide.Condition.attribute;
-import static com.codeborne.selenide.Condition.visible;
+import java.util.Locale;
+
+import static com.codeborne.selenide.Condition.*;
 import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.$x;
 import static com.codeborne.selenide.Selenide.open;
@@ -22,6 +23,7 @@ public class CheckBoxPage {
     private SelenideElement expandButtonByName(String name) {
         return nodeByName(name).$(".rc-tree-switcher");
     }
+    private final SelenideElement result = $("#result");
 
     @Step("Открыть страницу с чекбоксами")
     public CheckBoxPage openPage() {
@@ -57,6 +59,18 @@ public class CheckBoxPage {
     @Step("Раскрыть папку {name}")
     public CheckBoxPage expandFolder(String name) {
         expandButtonByName(name).click();
+        return this;
+    }
+
+    @Step("Проверить отображение результата")
+    public CheckBoxPage resultShouldHaveText(String name) {
+        result.shouldHave(text(name.toLowerCase(Locale.ROOT)));
+        return this;
+    }
+
+    @Step("Проверить отсутствие отображения результата")
+    public CheckBoxPage resultShouldNotHaveText(String name) {
+        result.shouldHave(text(name.toLowerCase(Locale.ROOT)));
         return this;
     }
 }
