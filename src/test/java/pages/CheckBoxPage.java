@@ -70,7 +70,7 @@ public class CheckBoxPage {
 
     @Step("Проверить отсутствие отображения результата")
     public CheckBoxPage resultShouldNotHaveText(String name) {
-        result.shouldHave(text(name.toLowerCase(Locale.ROOT)));
+        result.shouldNotHave(text(name.toLowerCase(Locale.ROOT)));
         return this;
     }
 }
