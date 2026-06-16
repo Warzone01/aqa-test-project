@@ -1,15 +1,17 @@
-package tests.api;
+package tests.api.demoqa;
 
-import api.AccountClient;
-import api.BookStoreClient;
-import api.model.Credentials;
-import api.model.Token;
-import api.model.User;
-import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.BeforeEach;
+import api.demoqa.AccountClient;
+import api.demoqa.BookStoreClient;
+import api.demoqa.model.Credentials;
+import api.demoqa.model.Token;
+import api.demoqa.model.User;
+import org.junit.jupiter.api.AfterAll;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.TestInstance;
 
 import java.util.UUID;
 
+@TestInstance(TestInstance.Lifecycle.PER_CLASS)
 public abstract class BaseApiTest {
 
     protected final AccountClient accountClient = new AccountClient();
@@ -19,24 +21,24 @@ public abstract class BaseApiTest {
     protected String userId;
     protected String token;
 
-    @BeforeEach
+    @BeforeAll
     void createTestUser() {
         credentials = new Credentials(
                 "aqa_" + UUID.randomUUID().toString().substring(0, 8),
                 "Test!12345"
         );
 
-        User user = accountClient.createUserSuccessfully(credentials);
-        Token generatedToken = accountClient.generateTokenSuccessfully(credentials);
+        User user = accountClient.createUserForSetupSuccessfully(credentials);
+        Token generatedToken = accountClient.generateTokenForSetupSuccessfully(credentials);
 
         userId = user.userID();
         token = generatedToken.token();
     }
 
-    @AfterEach
+    @AfterAll
     void deleteTestUser() {
         if (userId != null && token != null) {
-            accountClient.deleteUser(userId, token)
+            accountClient.deleteUserForSetup(userId, token)
                     .then()
                     .statusCode(204);
         }

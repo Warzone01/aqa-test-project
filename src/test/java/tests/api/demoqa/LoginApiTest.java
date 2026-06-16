@@ -1,6 +1,6 @@
-package tests.api;
+package tests.api.demoqa;
 
-import api.model.Token;
+import api.demoqa.model.Token;
 import io.qameta.allure.Feature;
 import io.qameta.allure.Story;
 import org.junit.jupiter.api.DisplayName;
@@ -16,6 +16,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 @Feature("DemoQA API: авторизация")
 @DisplayName("API авторизации")
 @Tag("api")
+@Tag("demoqa")
 @Tag("regression")
 public class LoginApiTest extends BaseApiTest {
 
@@ -47,7 +48,7 @@ public class LoginApiTest extends BaseApiTest {
     @Tag("negative")
     void invalidPasswordIsRejected() {
         Token rejectedToken = accountClient.generateToken(
-                        new api.model.Credentials(credentials.userName(), "Wrong!Pass9")
+                        new api.demoqa.model.Credentials(credentials.userName(), "Wrong!Pass9")
                 )
                 .then()
                 .statusCode(200)

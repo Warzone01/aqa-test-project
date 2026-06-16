@@ -1,4 +1,4 @@
-package api.model;
+package api.demoqa.model;
 
 public record Isbn(String isbn) {
 }

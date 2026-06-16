@@ -1,8 +1,8 @@
-package tests.api;
+package tests.api.demoqa;
 
-import api.BookStoreClient;
-import api.model.Book;
-import api.model.Books;
+import api.demoqa.BookStoreClient;
+import api.demoqa.model.Book;
+import api.demoqa.model.Books;
 import io.qameta.allure.Feature;
 import io.qameta.allure.Story;
 import org.junit.jupiter.api.DisplayName;
@@ -18,6 +18,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 @Feature("DemoQA API: книги")
 @DisplayName("API книг")
 @Tag("api")
+@Tag("demoqa")
 @Tag("regression")
 public class BooksApiTest {
 
