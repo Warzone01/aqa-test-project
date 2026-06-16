@@ -16,6 +16,8 @@
         <junit.jupiter.version>5.10.2</junit.jupiter.version>
         <selenide.version>7.16.2</selenide.version>
         <allure.version>2.35.2</allure.version>
+        <rest.assured.version>5.5.6</rest.assured.version>
+        <jackson.version>2.18.3</jackson.version>
         <aspectj.version>1.9.22.1</aspectj.version>
         <slf4j.version>2.0.18</slf4j.version>
         <maven.compiler.version>3.13.0</maven.compiler.version>
@@ -47,6 +49,24 @@
             <groupId>io.qameta.allure</groupId>
             <artifactId>allure-selenide</artifactId>
             <version>${allure.version}</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>io.qameta.allure</groupId>
+            <artifactId>allure-rest-assured</artifactId>
+            <version>${allure.version}</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>io.rest-assured</groupId>
+            <artifactId>rest-assured</artifactId>
+            <version>${rest.assured.version}</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-databind</artifactId>
+            <version>${jackson.version}</version>
             <scope>test</scope>
         </dependency>
         <dependency>
