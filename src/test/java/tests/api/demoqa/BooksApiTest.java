@@ -1,8 +1,7 @@
-package tests.api;
+package tests.api.demoqa;
 
-import api.BookStoreClient;
-import api.model.Book;
-import api.model.Books;
+import api.demoqa.BookStoreClient;
+import api.demoqa.model.Books;
 import io.qameta.allure.Feature;
 import io.qameta.allure.Story;
 import org.junit.jupiter.api.DisplayName;
@@ -18,8 +17,13 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 @Feature("DemoQA API: книги")
 @DisplayName("API книг")
 @Tag("api")
+@Tag("demoqa")
 @Tag("regression")
 public class BooksApiTest {
+
+    private static final String EXISTING_ISBN = "9781449325862";
+    private static final String EXISTING_TITLE = "Git Pocket Guide";
+    private static final String EXISTING_AUTHOR = "Richard E. Silverman";
 
     private final BookStoreClient bookStoreClient = new BookStoreClient();
 
@@ -44,14 +48,12 @@ public class BooksApiTest {
     @DisplayName("Книгу можно найти по ISBN из каталога")
     @Test
     void bookCanBeFoundByIsbn() {
-        Book catalogBook = bookStoreClient.getBooksSuccessfully().books().get(0);
-
-        bookStoreClient.getBook(catalogBook.isbn())
+        bookStoreClient.getBook(EXISTING_ISBN)
                 .then()
                 .statusCode(200)
-                .body("isbn", equalTo(catalogBook.isbn()))
-                .body("title", equalTo(catalogBook.title()))
-                .body("author", equalTo(catalogBook.author()));
+                .body("isbn", equalTo(EXISTING_ISBN))
+                .body("title", equalTo(EXISTING_TITLE))
+                .body("author", equalTo(EXISTING_AUTHOR));
     }
 
     @Story("Данные книги")

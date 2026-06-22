@@ -1,4 +1,4 @@
-package api;
+package api.demoqa;
 
 import java.util.Locale;
 

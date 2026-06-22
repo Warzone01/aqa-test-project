@@ -4,14 +4,37 @@ API-тесты покрывают реальные эндпоинты DemoQA Acc
 В тестах используются REST Assured, типизированные модели запросов и ответов, вложения запросов в Allure,
 динамическое создание тестовых пользователей и очистка данных через API.
 
+API Reqres вынесен в отдельный пакет `src/test/java/api/reqres`, чтобы не смешивать независимые сервисы.
+Тесты покрывают демо-приложение `https://demo.reqres.in/`: конфигурацию проекта, запрос доступа,
+негативную верификацию кода и защиту задач без сессионного токена.
+
 Запуск только API-тестов:
 
 ```powershell
 .\mvnw.cmd test -Dgroups=api
 ```
 
+Запуск только Reqres API:
+
+```powershell
+.\mvnw.cmd test -Dgroups=reqres
+```
+
+То же самое через Maven-профили:
+
+```powershell
+.\mvnw.cmd test -Pdemoqa-api
+.\mvnw.cmd test -Preqres
+```
+
+Архитектура API-тестов описана в `docs/api-architecture.md`.
+
 Адрес API можно переопределить параметром `-DapiBaseUrl=https://demoqa.com`
 или переменной окружения `API_BASE_URL`.
+
+Параметры Reqres можно переопределить через `-DreqresBaseUrl`, `-DreqresProjectId`,
+`-DreqresPublicApiKey`, `-DreqresManageApiKey`, `-DreqresCollectionSlug` или переменные окружения
+`REQRES_BASE_URL`, `REQRES_PROJECT_ID`, `REQRES_PUBLIC_API_KEY`, `REQRES_MANAGE_API_KEY`, `REQRES_COLLECTION_SLUG`.
 
 Учебный проект UI-автоматизации, организованный по принципам рабочего тестового проекта.
 
@@ -101,5 +124,5 @@ allure serve target/allure-results
 
 ## CI
 
-GitHub Actions запускает smoke-тесты для pull request и полный `verify` для основной ветки.
-Allure results сохраняются как артефакт workflow.
+GitHub Actions запускает smoke-тесты для pull request, отдельные API-проверки DemoQA и Reqres, а также полный `verify` для основной ветки.
+Allure results сохраняются как артефакты workflow.

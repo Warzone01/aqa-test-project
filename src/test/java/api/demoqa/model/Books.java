@@ -1,4 +1,4 @@
-package api.model;
+package api.demoqa.model;
 
 import java.util.List;
 

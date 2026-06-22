@@ -1,5 +1,6 @@
-package api;
+package api.demoqa;
 
+import io.qameta.allure.Allure;
 import io.qameta.allure.restassured.AllureRestAssured;
 import io.restassured.builder.RequestSpecBuilder;
 import io.restassured.builder.ResponseSpecBuilder;
@@ -23,11 +24,16 @@ public final class ApiSpecifications {
     }
 
     public static RequestSpecification request() {
-        return new RequestSpecBuilder()
+        RequestSpecBuilder builder = new RequestSpecBuilder()
                 .setBaseUri(ApiConfig.baseUrl())
                 .setContentType(ContentType.JSON)
-                .addFilter(new AllureRestAssured())
-                .build();
+                .addFilter(new DemoQaRetryFilter());
+
+        if (Allure.getLifecycle().getCurrentTestCase().isPresent()) {
+            builder.addFilter(new AllureRestAssured());
+        }
+
+        return builder.build();
     }
 
     public static RequestSpecification authorizedRequest(String token) {

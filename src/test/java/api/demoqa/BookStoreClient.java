@@ -1,13 +1,13 @@
-package api;
+package api.demoqa;
 
-import api.model.BookCollection;
-import api.model.Books;
+import api.demoqa.model.BookCollection;
+import api.demoqa.model.Books;
 import io.qameta.allure.Step;
 import io.restassured.response.Response;
 
-import static api.ApiSpecifications.authorizedRequest;
-import static api.ApiSpecifications.jsonResponse;
-import static api.ApiSpecifications.request;
+import static api.demoqa.ApiSpecifications.authorizedRequest;
+import static api.demoqa.ApiSpecifications.jsonResponse;
+import static api.demoqa.ApiSpecifications.request;
 import static io.restassured.RestAssured.given;
 
 public class BookStoreClient {

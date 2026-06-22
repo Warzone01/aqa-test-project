@@ -1,9 +1,9 @@
-package tests.api;
+package tests.api.demoqa;
 
-import api.model.Book;
-import api.model.BookCollection;
-import api.model.Isbn;
-import api.model.User;
+import api.demoqa.model.Book;
+import api.demoqa.model.BookCollection;
+import api.demoqa.model.Isbn;
+import api.demoqa.model.User;
 import io.qameta.allure.Feature;
 import io.qameta.allure.Story;
 import org.junit.jupiter.api.DisplayName;
@@ -19,6 +19,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 @Feature("DemoQA API: профиль")
 @DisplayName("API профиля")
 @Tag("api")
+@Tag("demoqa")
 @Tag("regression")
 public class ProfileApiTest extends BaseApiTest {
 

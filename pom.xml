@@ -146,5 +146,17 @@
                 <groups>negative</groups>
             </properties>
         </profile>
+        <profile>
+            <id>demoqa-api</id>
+            <properties>
+                <groups>demoqa</groups>
+            </properties>
+        </profile>
+        <profile>
+            <id>reqres</id>
+            <properties>
+                <groups>reqres</groups>
+            </properties>
+        </profile>
     </profiles>
 </project>
