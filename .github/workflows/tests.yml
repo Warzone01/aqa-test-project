@@ -1,4 +1,4 @@
-name: UI tests
+name: Tests
 
 on:
   push:
@@ -42,5 +42,42 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: allure-results
+          path: target/allure-results
+          if-no-files-found: warn
+
+  api-tests:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    strategy:
+      fail-fast: false
+      matrix:
+        service:
+          - name: demoqa-api
+            profile: demoqa-api
+          - name: reqres-api
+            profile: reqres
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Java
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: "17"
+          cache: maven
+
+      - name: Make Maven Wrapper executable
+        run: chmod +x mvnw
+
+      - name: Run ${{ matrix.service.name }} tests
+        run: ./mvnw --batch-mode clean test -P${{ matrix.service.profile }}
+
+      - name: Upload ${{ matrix.service.name }} Allure results
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: allure-results-${{ matrix.service.name }}
           path: target/allure-results
           if-no-files-found: warn

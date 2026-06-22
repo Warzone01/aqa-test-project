@@ -124,5 +124,5 @@ allure serve target/allure-results
 
 ## CI
 
-GitHub Actions запускает smoke-тесты для pull request и полный `verify` для основной ветки.
-Allure results сохраняются как артефакт workflow.
+GitHub Actions запускает smoke-тесты для pull request, отдельные API-проверки DemoQA и Reqres, а также полный `verify` для основной ветки.
+Allure results сохраняются как артефакты workflow.
